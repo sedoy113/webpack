@@ -21,8 +21,6 @@
 ### Установка
 
 ```bash
-git clone https://github.com/your-repo/webpack-boilerplate.git
-cd webpack-boilerplate
 npm install
 ```
 
