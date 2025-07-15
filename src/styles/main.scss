@@ -1,5 +1,6 @@
+// function
 @use "variables" as *;
 @use "mixins" as *;
 
-@use "../blocks/card/card" as *;
-@use "../blocks/nav/nav" as *;
+@use "@/blocks/card/card" as *;
+@use "@/blocks/nav/nav" as *;
