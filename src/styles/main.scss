@@ -1,6 +1,11 @@
 // function
 @use "variables" as *;
 @use "mixins" as *;
+// reboot
+@use "@/vendor/normalize" as *;
+@use "@/vendor/reboot" as *;
+@use "@/vendor/fonts";
 
+// block
 @use "@/blocks/card/card" as *;
 @use "@/blocks/nav/nav" as *;
