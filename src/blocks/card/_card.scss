@@ -1,8 +1,9 @@
 @use "@/styles/functions" as *;
+@use "@/styles/variables" as *;
 
 .card {
-	font-family: "Inter", Arial, sans-serif;
-	border-radius: 10px;
+	font-family: $main-font;
+	border-radius: rem(10);
 	position: relative;
 	overflow: hidden;
 	font-size: rem(20);
