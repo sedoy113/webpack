@@ -5,9 +5,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 const sass = require('sass');
 
-// Определяем режим сборки
-const isProduction = process.env.NODE_ENV === 'production';
-
 module.exports = {
 	entry: {
 		main: './src/index.js',
@@ -15,12 +12,12 @@ module.exports = {
 	},
 	output: {
 		path: path.resolve(__dirname, 'build'),
-		filename: 'js/[name].[contenthash].js',
-		publicPath: isProduction ? './' : '/', // Здесь меняем путь в зависимости от режима
-		assetModuleFilename: 'assets/[name][ext]'
+		filename: 'js/[name].[contenthash].js', // Хеш только для JS
+		publicPath: '/',
+		assetModuleFilename: 'assets/[name][ext]' // Без хеша для общих ассетов
 	},
-	mode: isProduction ? 'production' : 'development',
-	devtool: isProduction ? 'source-map' : 'eval-source-map',
+	mode: 'development',
+	devtool: 'source-map',
 	devServer: {
 		static: {
 			directory: path.resolve(__dirname, 'build'),
@@ -87,7 +84,6 @@ module.exports = {
 							extract: true,
 							spriteFilename: 'sprite.svg',
 							symbolId: 'icon-[name]',
-							publicPath: isProduction ? './' : '/', // Путь для спрайтов
 						},
 					},
 					{
@@ -109,7 +105,6 @@ module.exports = {
 				type: 'asset/resource',
 				generator: {
 					filename: 'images/[name][ext]',
-					publicPath: isProduction ? './' : '/', // Путь для изображений
 				},
 			},
 			{
@@ -117,7 +112,6 @@ module.exports = {
 				type: 'asset/resource',
 				generator: {
 					filename: 'fonts/[name][ext]',
-					publicPath: isProduction ? './fonts/' : '/fonts/', // Путь для шрифтов
 				},
 			},
 			{
@@ -127,7 +121,6 @@ module.exports = {
 						loader: MiniCssExtractPlugin.loader,
 						options: {
 							esModule: false,
-							publicPath: isProduction ? '../' : '/', // Путь для CSS-ресурсов
 						},
 					},
 					{
@@ -195,16 +188,16 @@ module.exports = {
 		new HtmlWebpackPlugin({
 			template: './src/index.html',
 			filename: 'index.html',
-			minify: isProduction ? {
+			minify: {
 				collapseWhitespace: true,
 				removeComments: true,
 				removeRedundantAttributes: true,
-			} : false,
+			},
 			chunks: ['main', 'styles'],
 		}),
 		new CleanWebpackPlugin(),
 		new MiniCssExtractPlugin({
-			filename: 'css/[name].[contenthash].css',
+			filename: 'css/[name].[contenthash].css', // Хеш для CSS
 			chunkFilename: 'css/[id].[contenthash].css',
 		}),
 		new SpriteLoaderPlugin({
