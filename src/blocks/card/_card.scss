@@ -1,8 +1,10 @@
+@use "../../styles/functions" as *;
+
 .card {
 	font-family: "Inter", Arial, sans-serif;
-	-webkit-border-radius: 10px;
-	-moz-border-radius: 10px;
 	border-radius: 10px;
 	position: relative;
 	overflow: hidden;
+	font-size: 20px;
+	font-size: rem(20);
 }
